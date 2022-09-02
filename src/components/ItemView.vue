@@ -33,7 +33,7 @@
           }"
           :pagination="{
             el: '.sw-items-pg',
-            clickable : true
+            clickable: true
           }"
           
           >

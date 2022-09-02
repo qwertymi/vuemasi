@@ -15,58 +15,19 @@
         <li><a href="#"><img v-bind:src="require('@/assets/images/sns_facebook.png')" alt="facebook"></a></li>
       </ul>
     </div>
+
     <ul class="mb-menu">
-      <li>
-        <a href="#">마시그래이</a>
+      <li v-for="(item,index) in menudata" :key="index">
+        <a :href="item.mainlink">{{item.mainstr}}</a>
+
         <ul class="mb-submenu">
-          <li><a href="#">회사소개</a></li>
-          <li><a href="#">연혁</a></li>
-          <li><a href="#">CEO인사말</a></li>
-          <li><a href="#">BI / 비전</a></li>
-          <li><a href="#">오시는길</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">메뉴</a>
-        <ul class="mb-submenu">
-          <li><a href="#">신메뉴</a></li>
-          <li><a href="#">커피</a></li>
-          <li><a href="#">음료</a></li>
-          <li><a href="#">디저트</a></li>
-          <li><a href="#">MD상품</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">프랜차이즈</a>
-        <ul class="mb-submenu">
-          <li><a href="#">가맹안내</a></li>
-          <li><a href="#">가맹절차</a></li>
-          <li><a href="#">매장인테리어</a></li>
-          <li><a href="#">커피 아카데미</a></li>
-          <li><a href="#">가맹상담신청</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">매장안내</a>
-        <ul class="mb-submenu">
-          <li><a href="#">매장안내</a></li>
-        </ul>
-      </li>
-      <li><a href="#">공지사항</a>
-        <ul class="mb-submenu">
-          <li><a href="#">공지사항</a></li>
-          <li><a href="#">이벤트</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">고객의소리</a>
-        <ul class="mb-submenu">
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Q&amp;A</a></li>
-          <li><a href="#">케이터링</a></li>
+          <li v-for="(subitem, subindex) in item.sub" :key="subindex">
+            <a :href="sublink">{{subitem.substr}}</a>
+          </li>
         </ul>
       </li>
     </ul>
+
 
   </div>
 
@@ -74,11 +35,17 @@
 
 <script>
   import {
+    computed,
     onMounted
   } from 'vue'
   import $ from 'jquery'
+  import {useStore} from 'vuex'
+
   export default {
     setup() {
+      const store = useStore();
+      const menudata = computed(() => store.getters.getMenuData)
+
       onMounted(() => {
         let mb_mainmenu = $('.mb-menu > li > a');
         let mb_submenu = $('.mb-submenu');
@@ -165,6 +132,9 @@
           }
         });
       })
+      return {
+        menudata
+      }
     }
   }
 </script>

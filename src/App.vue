@@ -15,6 +15,7 @@
 </template>
 
 <script>
+
   import GoTop from '@/components/GoTop.vue'
   import MbMenu from '@/components/MbMenu.vue'
   import FixMenu from '@/components/FixMenu.vue'
@@ -25,8 +26,14 @@
   import FranchView from '@/components/FranchView.vue'
   import SnsView from '@/components/SnsView.vue'
   import FooterView from '@/components/FooterView.vue'
+  // import axios from 'axios'
+
+  // 공통으로 관리되는 state를 참조함
+  // action 호출
+  import {useStore} from 'vuex'
 
   export default {
+    name: 'App',
     components: {
       GoTop,
       MbMenu,
@@ -38,8 +45,16 @@
       FranchView,
       SnsView,
       FooterView
+    },
+    setup() {
+      const store = useStore();
+      // actions의 메소드 사용 - store.dispatch('메소드명')
+      store.dispatch('fetchMenudata');
 
+      return {
+      }
     }
+
   }
 </script>
 
