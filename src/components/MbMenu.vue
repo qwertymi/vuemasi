@@ -36,7 +36,7 @@
 <script>
   import {
     computed,
-    onMounted
+    onUpdated
   } from 'vue'
   import $ from 'jquery'
   import {useStore} from 'vuex'
@@ -46,40 +46,32 @@
       const store = useStore();
       const menudata = computed(() => store.getters.getMenuData)
 
-      onMounted(() => {
+      onUpdated(() => {      
         let mb_mainmenu = $('.mb-menu > li > a');
         let mb_submenu = $('.mb-submenu');
 
         $.each(mb_mainmenu, function (index) {
-          $(this).click(function (event) {
-            // href 를 막아준다.
+          // 이벤트 바인딩 : 이벤트를 후에 연결함
+          $(this).on('click', function(event){
             event.preventDefault();
+          })
 
-            // 클릭하면 현재 포커스 클래스가 있는지 검토
+          $(this).click(function (event) {
+            event.preventDefault();
             let temp = $(this).hasClass('mb-menu-focus');
-
             if (temp) {
-              // 포커스 색상 적용해제
               $(this).removeClass('mb-menu-focus');
-              // 아이콘 모션 해제
               $(this).removeClass('mb-icon-rot');
 
               // 펼쳐진 해당 서브메뉴를 닫아준다.
               mb_submenu.eq(index).hide();
             } else {
 
-              // 일단 모두 숨겨라
               mb_submenu.hide();
-
-              // 일단 모든 포커스 색상을 해제한다.
               mb_mainmenu.removeClass('mb-menu-focus');
-
-              // 일단 아이콘을 원래대로 돌려라
               mb_mainmenu.removeClass('mb-icon-rot');
 
-              // 포커스 색상 적용하기
               $(this).addClass('mb-menu-focus');
-              // 아이콘을 돌리자.    
               $(this).addClass('mb-icon-rot');
 
               // 클릭된 번호만 보여라
@@ -132,6 +124,9 @@
           }
         });
       })
+      
+
+      
       return {
         menudata
       }

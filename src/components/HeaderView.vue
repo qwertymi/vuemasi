@@ -34,7 +34,7 @@
 <script>
   import {
     computed,
-    onMounted
+    onUpdated
   } from 'vue'
   import $ from 'jquery'
   import {useStore} from 'vuex'
@@ -44,7 +44,7 @@
       const store = useStore();
       const menudata = computed( () => store.getters.getMenuData )
 
-      onMounted(() => {
+      onUpdated(() => {
         // 메인 메뉴 기능
         let header = $('.header');
         let header_top = $('.header-top');

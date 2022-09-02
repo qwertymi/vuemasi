@@ -40,9 +40,21 @@
 </template>
 
 <script>
-export default {
+  // import { Navigation } from 'swiper'
+  // import { Swiper,SwiperSlide } from 'swiper/vue'
+  // import 'swiper/css'
+  // import 'swiper/css/navigation'
 
+
+export default {
+  setup(){
+
+    return{
+
+    }
+  }
 }
+
 </script>
 
 <style>

@@ -20,7 +20,6 @@ export default createStore({
   mutations: {
     MENU_DATA_INIT(state, payload){
       state.menuData = payload
-      console.log('mutation :', payload);
     }
   },
   getters: {
