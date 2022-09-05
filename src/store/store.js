@@ -8,7 +8,7 @@ export default createStore({
   actions: {
     fetchMenudata({commit}){
       // 외부에서 json.파일을 불러온다
-      axios.get('/data/menu.json')
+      axios.get('./data/menu.json')
       .then(response => {
         // console.log('axios : ', response.data);
         // mutations 실행 
